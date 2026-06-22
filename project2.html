@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Portal</title>
+</head>
+<body style="font-family:Arial; margin:0; background:#f4f4f4;">
+
+    <!-- Header -->
+    <div style="background:#007bff; color:white; padding:20px; text-align:center;">
+        <h1>Online Job Portal</h1>
+        <p>Find Your Dream Job</p>
+    </div>
+
+    <!-- Search Section -->
+    <div style="padding:20px; text-align:center;">
+        <input type="text" id="searchBox"
+            placeholder="Search Job Title..."
+            style="padding:10px; width:300px; border:1px solid gray; border-radius:5px;">
+
+        <button onclick="searchJobs()"
+            style="padding:10px 20px; background:green; color:white; border:none; border-radius:5px;">
+            Search
+        </button>
+    </div>
+
+    <!-- Company Profile -->
+    <div style="background:white; margin:20px; padding:20px; border-radius:10px;">
+        <h2>Company Profile</h2>
+        <h3>Tech Solutions Pvt Ltd</h3>
+        <p>
+            We are a leading software company providing
+            web development, mobile app development,
+            and AI solutions.
+        </p>
+    </div>
+
+    <!-- Job Listings -->
+    <div style="background:white; margin:20px; padding:20px; border-radius:10px;">
+        <h2>Available Jobs</h2>
+
+        <div class="job" style="border:1px solid #ddd; padding:15px; margin-bottom:10px;">
+            <h3>Web Developer</h3>
+            <p>Location: Delhi</p>
+            <p>Salary: ₹30,000/month</p>
+            <button onclick="applyJob('Web Developer')"
+                style="background:blue; color:white; padding:8px 15px; border:none;">
+                Apply
+            </button>
+        </div>
+
+        <div class="job" style="border:1px solid #ddd; padding:15px; margin-bottom:10px;">
+            <h3>Java Developer</h3>
+            <p>Location: Noida</p>
+            <p>Salary: ₹40,000/month</p>
+            <button onclick="applyJob('Java Developer')"
+                style="background:blue; color:white; padding:8px 15px; border:none;">
+                Apply
+            </button>
+        </div>
+
+        <div class="job" style="border:1px solid #ddd; padding:15px; margin-bottom:10px;">
+            <h3>UI/UX Designer</h3>
+            <p>Location: Gurgaon</p>
+            <p>Salary: ₹35,000/month</p>
+            <button onclick="applyJob('UI/UX Designer')"
+                style="background:blue; color:white; padding:8px 15px; border:none;">
+                Apply
+            </button>
+        </div>
+    </div>
+
+    <!-- Resume Upload -->
+    <div style="background:white; margin:20px; padding:20px; border-radius:10px;">
+        <h2>Upload Resume</h2>
+
+        <input type="file" id="resumeFile">
+
+        <button onclick="uploadResume()"
+            style="padding:10px; background:green; color:white; border:none;">
+            Upload Resume
+        </button>
+
+        <p id="resumeMessage"></p>
+    </div>
+
+    <!-- Application Status -->
+    <div style="background:white; margin:20px; padding:20px; border-radius:10px;">
+        <h2>Application Status</h2>
+        <p id="status">No job applied yet.</p>
+    </div>
+
+    <script>
+
+        function searchJobs() {
+
+            let input =
+                document.getElementById("searchBox")
+                .value
+                .toLowerCase();
+
+            let jobs =
+                document.getElementsByClassName("job");
+
+            for(let i=0; i<jobs.length; i++) {
+
+                let title =
+                    jobs[i]
+                    .getElementsByTagName("h3")[0]
+                    .innerText
+                    .toLowerCase();
+
+                if(title.includes(input)) {
+                    jobs[i].style.display = "block";
+                }
+                else {
+                    jobs[i].style.display = "none";
+                }
+            }
+        }
+
+        function applyJob(jobTitle) {
+
+            document.getElementById("status").innerHTML =
+                "Successfully Applied for: <b>"
+                + jobTitle +
+                "</b>";
+
+            alert("Application Submitted for " + jobTitle);
+        }
+
+        function uploadResume() {
+
+            let file =
+                document.getElementById("resumeFile");
+
+            if(file.files.length > 0) {
+
+                document.getElementById("resumeMessage")
+                .innerHTML =
+                "Resume Uploaded: <b>" +
+                file.files[0].name +
+                "</b>";
+            }
+            else {
+
+                alert("Please select a resume first.");
+            }
+        }
+
+    </script>
+
+</body>
+</html>
